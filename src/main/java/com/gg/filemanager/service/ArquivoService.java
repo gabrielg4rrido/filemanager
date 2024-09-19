@@ -36,8 +36,10 @@ public class ArquivoService {
     public ArquivoDTO criar(ArquivoDTO arquivoDTO) {
         Arquivo novoArquivo = new Arquivo();
         novoArquivo.setNome(arquivoDTO.nome());
+        novoArquivo.setExtensao(arquivoDTO.extensao());
 
-        Diretorio diretorio = diretorioRepository.findById(arquivoDTO.diretorioId()).orElseThrow(() -> new ObjectNotFoundException(arquivoDTO.diretorioId()));
+        Diretorio diretorio = diretorioRepository.findById(arquivoDTO.diretorioId())
+                .orElseThrow(() -> new ObjectNotFoundException(arquivoDTO.diretorioId()));
         novoArquivo.setDiretorio(diretorio);
 
         Arquivo arquivoSalvo = arquivoRepository.save(novoArquivo);
