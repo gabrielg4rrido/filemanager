@@ -1,13 +1,14 @@
 package com.gg.filemanager.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "ARQUIVOS")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Arquivo {
 
     @Id

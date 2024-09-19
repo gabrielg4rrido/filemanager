@@ -1,8 +1,7 @@
 package com.gg.filemanager.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -10,6 +9,8 @@ import java.util.List;
 @Table(name = "DIRETORIOS")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Diretorio {
 
     @Id
