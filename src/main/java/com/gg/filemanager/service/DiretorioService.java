@@ -2,9 +2,10 @@ package com.gg.filemanager.service;
 
 import com.gg.filemanager.dto.ArquivoDTO;
 import com.gg.filemanager.dto.DiretorioDTO;
-import com.gg.filemanager.model.Arquivo;
 import com.gg.filemanager.model.Diretorio;
+import com.gg.filemanager.model.Arquivo;
 import com.gg.filemanager.repository.DiretorioRepository;
+import com.gg.filemanager.service.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,70 +18,79 @@ public class DiretorioService {
     @Autowired
     private DiretorioRepository diretorioRepository;
 
-    public DiretorioDTO listarUm(Long id) {
-        Diretorio diretorioExistente = diretorioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Diretório não encontrado"));
-
-        return toDTO(diretorioExistente);
-    }
-
     public List<DiretorioDTO> listarTodos() {
-        return diretorioRepository.findAll().stream()
+        return diretorioRepository.findDiretoriosNivelSuperior().stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
+    public DiretorioDTO listarUm(Long id) {
+        Diretorio diretorio = diretorioRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id));
+        return toDTO(diretorio);
+    }
+
     public DiretorioDTO criar(DiretorioDTO diretorioDTO) {
-        Diretorio diretorio = toEntity(diretorioDTO);
-        Diretorio diretorioSalvo = diretorioRepository.save(diretorio);
+        Diretorio novoDiretorio = new Diretorio();
+        novoDiretorio.setNome(diretorioDTO.nome());
+
+        if (diretorioDTO.diretorioPaiId() != null) {
+            Diretorio diretorioPai = diretorioRepository.findById(diretorioDTO.diretorioPaiId())
+                    .orElseThrow(() -> new ObjectNotFoundException(diretorioDTO.diretorioPaiId()));
+            novoDiretorio.setDiretorioPai(diretorioPai);
+        } else {
+            novoDiretorio.setDiretorioPai(null);
+        }
+
+        Diretorio diretorioSalvo = diretorioRepository.save(novoDiretorio);
         return toDTO(diretorioSalvo);
     }
 
     public DiretorioDTO atualizar(Long id, DiretorioDTO diretorioDTO) {
         Diretorio diretorioExistente = diretorioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Diretório não encontrado"));
+                .orElseThrow(() -> new ObjectNotFoundException(id));
 
         diretorioExistente.setNome(diretorioDTO.nome());
-        diretorioExistente.setDiretoriosFilhos(diretorioDTO.diretoriosFilhos().stream()
-                .map(this::toEntity)
-                .collect(Collectors.toList()));
 
-        diretorioExistente.setArquivos(diretorioDTO.arquivos().stream()
-                .map(arquivoDTO -> new Arquivo(arquivoDTO.id(), arquivoDTO.nome(), arquivoDTO.extensao(), diretorioExistente))
-                .collect(Collectors.toList()));
+        if (diretorioDTO.diretorioPaiId() != null) {
+            Diretorio diretorioPai = diretorioRepository.findById(diretorioDTO.diretorioPaiId())
+                    .orElseThrow(() -> new ObjectNotFoundException(diretorioDTO.diretorioPaiId()));
+            diretorioExistente.setDiretorioPai(diretorioPai);
+        }
 
-        Diretorio atualizado = diretorioRepository.save(diretorioExistente);
-        return toDTO(atualizado);
+        Diretorio diretorioAtualizado = diretorioRepository.save(diretorioExistente);
+        return toDTO(diretorioAtualizado);
     }
 
     public void deletar(Long id) {
+        if (!diretorioRepository.existsById(id)) {
+            throw new ObjectNotFoundException(id);
+        }
         diretorioRepository.deleteById(id);
     }
 
-    private Diretorio toEntity(DiretorioDTO diretorioDTO) {
-        Diretorio diretorio = new Diretorio();
-        diretorio.setNome(diretorioDTO.nome());
+    private DiretorioDTO toDTO(Diretorio diretorio) {
+        List<ArquivoDTO> arquivos = (diretorio.getArquivos() != null) ?
+                diretorio.getArquivos().stream()
+                        .map(this::convertArquivoToDto)
+                        .collect(Collectors.toList())
+                : List.of();
 
-        diretorio.setDiretoriosFilhos(diretorioDTO.diretoriosFilhos().stream()
-                .map(this::toEntity)
-                .collect(Collectors.toList()));
+        List<DiretorioDTO> diretoriosFilhos = (diretorio.getDiretoriosFilhos() != null) ?
+                diretorio.getDiretoriosFilhos().stream()
+                        .map(this::toDTO)
+                        .collect(Collectors.toList())
+                : List.of();
 
-        diretorio.setArquivos(diretorioDTO.arquivos().stream()
-                .map(arquivoDTO -> new Arquivo(arquivoDTO.id(), arquivoDTO.nome(), arquivoDTO.extensao(), diretorio))
-                .collect(Collectors.toList()));
+        Long diretorioPaiId = (diretorio.getDiretorioPai() != null)
+                ? diretorio.getDiretorioPai().getId()
+                : null;
 
-        return diretorio;
+        return new DiretorioDTO(diretorio.getId(), diretorio.getNome(), diretorioPaiId, diretoriosFilhos, arquivos);
     }
 
-    private DiretorioDTO toDTO(Diretorio diretorio) {
-        List<DiretorioDTO> diretoriosFilhos = diretorio.getDiretoriosFilhos().stream()
-                .map(this::toDTO)
-                .toList();
-
-        List<ArquivoDTO> arquivos = diretorio.getArquivos().stream()
-                .map(arquivo -> new ArquivoDTO(arquivo.getId(), arquivo.getNome(), arquivo.getExtensao(), toDTO(diretorio)))
-                .collect(Collectors.toList());
-
-        return new DiretorioDTO(diretorio.getId(), diretorio.getNome(), diretoriosFilhos, arquivos);
+    private ArquivoDTO convertArquivoToDto(Arquivo arquivo) {
+        DiretorioDTO diretorioDTO = (arquivo.getDiretorio() != null) ? toDTO(arquivo.getDiretorio()) : null;
+        return new ArquivoDTO(arquivo.getId(), arquivo.getNome(), arquivo.getExtensao(), diretorioDTO);
     }
 }
