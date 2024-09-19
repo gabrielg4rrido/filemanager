@@ -1,6 +1,8 @@
 package com.gg.filemanager.controller;
 
+import com.gg.filemanager.dto.ArquivoDTO;
 import com.gg.filemanager.dto.DiretorioDTO;
+import com.gg.filemanager.service.ArquivoService;
 import com.gg.filemanager.service.DiretorioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,9 @@ public class DiretorioController {
 
     @Autowired
     private DiretorioService diretorioService;
+
+    @Autowired
+    private ArquivoService arquivoService;
 
     @GetMapping
     public ResponseEntity<List<DiretorioDTO>> listarDiretorios() {
@@ -47,5 +52,17 @@ public class DiretorioController {
     public ResponseEntity<Void> deletarDiretorio(@PathVariable Long id) {
         diretorioService.deletar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/arquivos")
+    public ResponseEntity<List<ArquivoDTO>> listarArquivosPorDiretorio(@PathVariable Long id) {
+        List<ArquivoDTO> arquivos = arquivoService.listarPorDiretorio(id);
+        return ResponseEntity.ok().body(arquivos);
+    }
+
+    @GetMapping("/{id}/filhos")
+    public ResponseEntity<List<DiretorioDTO>> listarDiretoriosFilhos(@PathVariable Long id) {
+        List<DiretorioDTO> filhos = diretorioService.listarDiretoriosFilhos(id);
+        return ResponseEntity.ok().body(filhos);
     }
 }

@@ -33,6 +33,12 @@ public class ArquivoService {
         return toDTO(arquivo);
     }
 
+    public List<ArquivoDTO> listarPorDiretorio(Long diretorioId) {
+        return arquivoRepository.findArquivosByDiretorioId(diretorioId).stream()
+                .map(this::toDTO)
+                .toList();
+    }
+
     public ArquivoDTO criar(ArquivoDTO arquivoDTO) {
         Arquivo novoArquivo = new Arquivo();
         novoArquivo.setNome(arquivoDTO.nome());

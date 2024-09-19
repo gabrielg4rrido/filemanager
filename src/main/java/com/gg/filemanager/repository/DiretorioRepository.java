@@ -12,4 +12,6 @@ public interface DiretorioRepository extends JpaRepository<Diretorio, Long> {
 
     @Query("SELECT d FROM Diretorio d WHERE d.diretorioPai IS NULL")
     List<Diretorio> findDiretoriosNivelSuperior();
+
+    List<Diretorio> findByDiretorioPaiId(Long diretorioPaiId);
 }

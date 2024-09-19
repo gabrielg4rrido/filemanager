@@ -33,6 +33,12 @@ public class DiretorioService {
         return toDTO(diretorio);
     }
 
+    public List<DiretorioDTO> listarDiretoriosFilhos(Long diretorioPaiId) {
+        return diretorioRepository.findByDiretorioPaiId(diretorioPaiId).stream()
+                .map(this::toDTO)
+                .toList();
+    }
+
     public DiretorioDTO criar(DiretorioDTO diretorioDTO) {
         Diretorio novoDiretorio = new Diretorio();
         novoDiretorio.setNome(diretorioDTO.nome());
