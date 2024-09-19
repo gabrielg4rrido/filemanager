@@ -1,6 +1,7 @@
 package com.gg.filemanager.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -15,10 +16,11 @@ public class Diretorio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "ID", updatable = false)
     private long id;
 
     @Column(name = "NOME")
+    @NotNull
     private String nome;
 
     @ManyToOne

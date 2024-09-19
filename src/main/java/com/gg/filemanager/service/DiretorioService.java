@@ -18,6 +18,9 @@ public class DiretorioService {
     @Autowired
     private DiretorioRepository diretorioRepository;
 
+    @Autowired
+    private ArquivoService arquivoService;
+
     public List<DiretorioDTO> listarTodos() {
         return diretorioRepository.findDiretoriosNivelSuperior().stream()
                 .map(this::toDTO)
@@ -72,7 +75,7 @@ public class DiretorioService {
     private DiretorioDTO toDTO(Diretorio diretorio) {
         List<ArquivoDTO> arquivos = (diretorio.getArquivos() != null) ?
                 diretorio.getArquivos().stream()
-                        .map(this::convertArquivoToDto)
+                        .map(arquivo -> arquivoService.toDTO(arquivo))
                         .collect(Collectors.toList())
                 : List.of();
 
@@ -87,10 +90,5 @@ public class DiretorioService {
                 : null;
 
         return new DiretorioDTO(diretorio.getId(), diretorio.getNome(), diretorioPaiId, diretoriosFilhos, arquivos);
-    }
-
-    private ArquivoDTO convertArquivoToDto(Arquivo arquivo) {
-        DiretorioDTO diretorioDTO = (arquivo.getDiretorio() != null) ? toDTO(arquivo.getDiretorio()) : null;
-        return new ArquivoDTO(arquivo.getId(), arquivo.getNome(), arquivo.getExtensao(), diretorioDTO);
     }
 }

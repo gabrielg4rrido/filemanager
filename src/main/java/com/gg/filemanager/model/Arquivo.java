@@ -1,6 +1,7 @@
 package com.gg.filemanager.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -17,12 +18,15 @@ public class Arquivo {
     private long id;
 
     @Column(name = "NOME")
+    @NotNull
     private String nome;
 
     @Column(name = "EXTENSAO")
+    @NotNull
     private String extensao;
 
     @ManyToOne
     @JoinColumn(name = "DIRETORIO_ID", referencedColumnName = "ID")
+    @NotNull
     private Diretorio diretorio;
 }
