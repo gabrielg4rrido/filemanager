@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(("/api/diretorios"))
+@RequestMapping("/api/diretorios")
 public class DiretorioController {
 
     @Autowired

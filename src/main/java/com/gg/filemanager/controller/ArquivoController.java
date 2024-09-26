@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(("/api/arquivos"))
+@RequestMapping("/api/arquivos")
 public class ArquivoController {
 
     @Autowired
