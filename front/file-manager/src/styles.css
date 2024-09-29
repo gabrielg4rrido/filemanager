@@ -34,13 +34,29 @@ li {
 
 .card {
   width: 200px;
-  background-color: #66C974 !important; /* Cor principal dos cards */
-  color: white !important; /* Cor do texto dentro dos cards */
 }
 
 .card-actions {
   display: flex;
   justify-content: center;
+}
+
+.fixed-size-card {
+  width: 250px; /* Largura fixa */
+  min-height: 150px; /* Altura mínima */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente */
+  align-items: center; /* Centraliza horizontalmente */
+  text-align: center; /* Centraliza o texto */
+}
+
+.arquivos-container {
+  margin-top: 16px; /* Espaçamento superior entre as divs principais */
+}
+
+.voltar-button {
+  margin-top: 16px; /* Espaçamento superior */
 }
 
 button {
