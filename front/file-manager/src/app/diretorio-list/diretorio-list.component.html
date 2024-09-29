@@ -1,22 +1,43 @@
 <div class="container">
   <h2>Mini sistema de arquivos virtuais ESSIA</h2>
 
+  <!-- Lista de diretórios -->
   <div class="card-container">
     <mat-card *ngFor="let dir of diretorios" class="card fixed-size-card">
       <mat-card-title>{{ dir.nome }}</mat-card-title>
       <mat-card-actions class="card-actions">
-        <button mat-raised-button color="primary" *ngIf="(dir.diretoriosFilhos && dir.diretoriosFilhos.length > 0)
-          || (dir.arquivos && dir.arquivos.length > 0)" (click)="navegarParaSubdiretorio(dir.id)">Abrir</button>
+        <button mat-raised-button color="primary" (click)="navegarParaSubdiretorio(dir.id)">Abrir</button>
+        <button mat-raised-button color="warn" (click)="excluirDiretorio(dir.id)">Excluir</button>
       </mat-card-actions>
     </mat-card>
   </div>
 
+  <!-- Formulário para criar novo diretório -->
+  <div class="form-container create-directory-form">
+    <label for="novoDiretorioNome">Nome do novo diretório</label>
+    <input id="novoDiretorioNome" [(ngModel)]="novoDiretorio.nome" placeholder="Nome do novo diretório">
+    <button mat-raised-button (click)="criarDiretorio()">Criar Diretório</button>
+  </div>
+
+  <!-- Lista de arquivos -->
   <div *ngIf="diretorioAtualId" class="arquivos-container">
     <div class="card-container">
       <mat-card *ngFor="let arquivo of arquivos" class="card fixed-size-card">
         <mat-card-title>{{ arquivo.nome }}.{{ arquivo.extensao }}</mat-card-title>
+        <mat-card-actions class="card-actions">
+          <button mat-raised-button color="warn" (click)="excluirArquivo(arquivo.id)">Excluir</button>
+        </mat-card-actions>
       </mat-card>
     </div>
+  </div>
+
+  <!-- Formulário para criar novo arquivo -->
+  <div *ngIf="diretorioAtualId" class="form-container">
+    <label for="novoArquivoNome">Nome do novo arquivo</label>
+    <input id="novoArquivoNome" [(ngModel)]="novoArquivo.nome" placeholder="Nome do novo arquivo">
+    <label for="novoArquivoExtensao">Extensão do novo arquivo</label>
+    <input id="novoArquivoExtensao" [(ngModel)]="novoArquivo.extensao" placeholder="Extensão do novo arquivo">
+    <button mat-raised-button (click)="criarArquivo()">Criar Arquivo</button>
   </div>
 
   <button *ngIf="diretorioAtualId" mat-raised-button color="primary" class="voltar-button" (click)="voltar()">Voltar</button>

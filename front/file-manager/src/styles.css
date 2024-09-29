@@ -1,10 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* Estilos globais */
 html, body {
   height: 100%;
-}
-
-body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   text-align: center;
@@ -30,6 +26,15 @@ li {
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
+  margin-bottom: 32px; /* Espaçamento entre os cards e o formulário */
+}
+
+.form-container {
+  margin-bottom: 16px;
+}
+
+.create-directory-form {
+  margin-bottom: 32px; /* Espaçamento entre os cards e o formulário para criar novo diretório */
 }
 
 .card {
@@ -42,8 +47,8 @@ li {
 }
 
 .fixed-size-card {
-  width: 250px; /* Largura fixa */
-  min-height: 150px; /* Altura mínima */
+  width: 300px; /* Aumenta a largura fixa */
+  min-height: 200px; /* Aumenta a altura mínima */
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centraliza verticalmente */

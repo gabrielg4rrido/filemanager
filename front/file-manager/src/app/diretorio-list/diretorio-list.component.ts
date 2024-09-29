@@ -1,23 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { DiretorioService } from '../service/diretorio.service';
+import { DiretorioService, DiretorioDTO, ArquivoDTO } from '../service/diretorio.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-diretorio-list',
   templateUrl: './diretorio-list.component.html',
   styleUrls: ['./diretorio-list.component.css'],
   standalone: true,
-  imports: [CommonModule, MatListModule, MatButtonModule, MatDividerModule, MatCardModule]
+  imports: [CommonModule, MatListModule, MatButtonModule, MatDividerModule, MatCardModule, MatInputModule, FormsModule]
 })
 export class DiretorioListComponent implements OnInit {
   diretorioAtualId: number | undefined;
-  diretorios: any[] = [];
-  arquivos: any[] = [];
+  diretorios: DiretorioDTO[] = [];
+  arquivos: ArquivoDTO[] = [];
+  novoDiretorio: DiretorioDTO = { id: 0, nome: '' };
+  novoArquivo: ArquivoDTO = { id: 0, nome: '', extensao: '' };
 
   constructor(
     private diretorioService: DiretorioService,
@@ -41,9 +45,53 @@ export class DiretorioListComponent implements OnInit {
   }
 
   listarArquivos(): void {
-    if(this.diretorioAtualId) {
+    if (this.diretorioAtualId) {
       this.diretorioService.listarArquivosPorDiretorio(this.diretorioAtualId).subscribe(data => {
         this.arquivos = data || [];
+      });
+    }
+  }
+
+  criarDiretorio(): void {
+    this.diretorioService.criarDiretorio(this.novoDiretorio).subscribe(() => {
+      this.listarDiretorios();
+      this.novoDiretorio = { id: 0, nome: '' };
+    });
+  }
+
+  atualizarDiretorio(diretorio: DiretorioDTO): void {
+    this.diretorioService.atualizarDiretorio(diretorio).subscribe(() => {
+      this.listarDiretorios();
+    });
+  }
+
+  excluirDiretorio(id: number): void {
+    this.diretorioService.excluirDiretorio(id).subscribe(() => {
+      this.listarDiretorios();
+    });
+  }
+
+  criarArquivo(): void {
+    if (this.diretorioAtualId) {
+      this.diretorioService.criarArquivo(this.diretorioAtualId, this.novoArquivo).subscribe(() => {
+        this.listarArquivos();
+        this.novoArquivo = { id: 0, nome: '', extensao: '' };
+      });
+    }
+  }
+
+  atualizarArquivo(arquivo: ArquivoDTO): void {
+    if (this.diretorioAtualId) {
+      this.diretorioService.atualizarArquivo(this.diretorioAtualId, arquivo).subscribe(() => {
+        this.listarArquivos();
+      });
+    }
+  }
+
+  excluirArquivo(id: number): void {
+    if (this.diretorioAtualId) {
+      this.diretorioService.excluirArquivo(this.diretorioAtualId, id).subscribe(() => {
+        this.listarArquivos();
       });
     }
   }
