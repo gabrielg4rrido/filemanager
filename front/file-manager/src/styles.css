@@ -1,5 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-ul { margin: 0 auto;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; text-align: center;}
+
+mat-list {
+  max-height: 400px; /* Ajuste a altura conforme necessário */
+  overflow-y: auto;  /* Adiciona rolagem se necessário */
+}
+
+mat-list-item {
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+mat-list-item:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Cor de destaque ao passar o mouse */
+}
+
+mat-list-item span {
+  margin-bottom: 8px; /* Espaço entre o span e o botão */
+}
+
+mat-list-item button {
+  margin-top: 8px;
+}

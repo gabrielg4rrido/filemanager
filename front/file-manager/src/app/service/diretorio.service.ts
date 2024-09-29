@@ -26,8 +26,9 @@ export class DiretorioService {
 
   listarDiretorios(idPai?: number): Observable<DiretorioDTO[]> {
     let url = this.apiUrl;
+
     if (idPai) {
-      url += `/${idPai}`;
+      url += `/${idPai}/filhos`;
     }
     return this.http.get<DiretorioDTO[]>(url);
   }
