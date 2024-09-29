@@ -58,7 +58,7 @@ export class DiretorioListComponent implements OnInit {
       alert('O nome do diretório não pode estar vazio.');
       return;
     }
-    this.novoDiretorio.diretorioPaiId = this.diretorioAtualId; // Define o ID do diretório pai
+    this.novoDiretorio.diretorioPaiId = this.diretorioAtualId;
     this.diretorioService.criarDiretorio(this.novoDiretorio).subscribe(() => {
       this.listarDiretorios();
       this.novoDiretorio = { id: 0, nome: '' };
@@ -83,7 +83,8 @@ export class DiretorioListComponent implements OnInit {
       return;
     }
     if (this.diretorioAtualId) {
-      this.diretorioService.criarArquivo(this.diretorioAtualId, this.novoArquivo).subscribe(() => {
+      this.novoArquivo.diretorioId = this.diretorioAtualId;
+      this.diretorioService.criarArquivo(this.novoArquivo).subscribe(() => {
         this.listarArquivos();
         this.novoArquivo = { id: 0, nome: '', extensao: '' };
       });
@@ -92,7 +93,7 @@ export class DiretorioListComponent implements OnInit {
 
   atualizarArquivo(arquivo: ArquivoDTO): void {
     if (this.diretorioAtualId) {
-      this.diretorioService.atualizarArquivo(this.diretorioAtualId, arquivo).subscribe(() => {
+      this.diretorioService.atualizarArquivo(arquivo).subscribe(() => {
         this.listarArquivos();
       });
     }
@@ -100,7 +101,7 @@ export class DiretorioListComponent implements OnInit {
 
   excluirArquivo(id: number): void {
     if (this.diretorioAtualId) {
-      this.diretorioService.excluirArquivo(this.diretorioAtualId, id).subscribe(() => {
+      this.diretorioService.excluirArquivo(id).subscribe(() => {
         this.listarArquivos();
       });
     }

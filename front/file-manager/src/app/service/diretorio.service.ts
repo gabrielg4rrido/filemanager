@@ -14,6 +14,7 @@ export interface ArquivoDTO {
   id: number;
   nome: string;
   extensao: string;
+  diretorioId?: number;
 }
 
 @Injectable({
@@ -52,15 +53,15 @@ export class DiretorioService {
     return this.http.delete<void>(`${this.diretorioUrl}/${id}`);
   }
 
-  criarArquivo(idDiretorio: number, arquivo: ArquivoDTO): Observable<ArquivoDTO> {
-    return this.http.post<ArquivoDTO>(`${this.arquivoUrl}/${idDiretorio}/arquivos`, arquivo);
+  criarArquivo(arquivo: ArquivoDTO): Observable<ArquivoDTO> {
+    return this.http.post<ArquivoDTO>(`${this.arquivoUrl}`, arquivo);
   }
 
-  atualizarArquivo(idDiretorio: number, arquivo: ArquivoDTO): Observable<ArquivoDTO> {
-    return this.http.put<ArquivoDTO>(`${this.arquivoUrl}/${idDiretorio}/arquivos/${arquivo.id}`, arquivo);
+  atualizarArquivo(arquivo: ArquivoDTO): Observable<ArquivoDTO> {
+    return this.http.put<ArquivoDTO>(`${this.arquivoUrl}/${arquivo.id}`, arquivo);
   }
 
-  excluirArquivo(idDiretorio: number, idArquivo: number): Observable<void> {
-    return this.http.delete<void>(`${this.arquivoUrl}/${idDiretorio}/arquivos/${idArquivo}`);
+  excluirArquivo(idArquivo: number): Observable<void> {
+    return this.http.delete<void>(`${this.arquivoUrl}/${idArquivo}`);
   }
 }
