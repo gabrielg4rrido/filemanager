@@ -1,25 +1,24 @@
-<div style="padding: 16px;">
+<div class="container">
   <h2>Diretórios</h2>
 
-  <mat-list>
-    <mat-list-item *ngFor="let dir of diretorios" class="diretorio-item">
-      <span>{{ dir.nome }}</span>
-      <button *ngIf="dir.diretoriosFilhos && dir.diretoriosFilhos.length > 0" mat-raised-button color="primary" (click)="navegarParaSubdiretorio(dir.id)">Abrir</button>
-    </mat-list-item>
-  </mat-list>
-
-  <mat-divider></mat-divider>
+  <div class="card-container">
+    <mat-card *ngFor="let dir of diretorios" class="card">
+      <mat-card-title>{{ dir.nome }}</mat-card-title>
+      <mat-card-actions class="card-actions">
+        <button mat-raised-button color="primary" *ngIf="(dir.diretoriosFilhos && dir.diretoriosFilhos.length > 0)
+          || (dir.arquivos && dir.arquivos.length > 0)" (click)="navegarParaSubdiretorio(dir.id)">Abrir</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
   <div *ngIf="diretorioAtualId">
     <h3>Arquivos</h3>
-    <mat-list>
-      <mat-list-item *ngFor="let arquivo of arquivos">
-        <span>{{ arquivo.nome }}.{{ arquivo.extensao }}</span>
-      </mat-list-item>
-    </mat-list>
+    <div class="card-container">
+      <mat-card *ngFor="let arquivo of arquivos" class="card">
+        <mat-card-title>{{ arquivo.nome }}.{{ arquivo.extensao }}</mat-card-title>
+      </mat-card>
+    </div>
   </div>
-
-  <mat-divider></mat-divider>
 
   <button *ngIf="diretorioAtualId" mat-raised-button color="primary" (click)="voltar()">Voltar</button>
 </div>

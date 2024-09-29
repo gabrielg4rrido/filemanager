@@ -32,4 +32,10 @@ export class DiretorioService {
     }
     return this.http.get<DiretorioDTO[]>(url);
   }
+
+  listarArquivosPorDiretorio(idDiretorio?: number): Observable<ArquivoDTO[]> {
+    let url = this.apiUrl += `/${idDiretorio}/arquivos`;
+
+    return this.http.get<ArquivoDTO[]>(url);
+  }
 }

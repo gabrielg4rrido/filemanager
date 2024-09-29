@@ -1,28 +1,68 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; text-align: center;}
-
-mat-list {
-  max-height: 400px; /* Ajuste a altura conforme necessário */
-  overflow-y: auto;  /* Adiciona rolagem se necessário */
+html, body {
+  height: 100%;
 }
 
-mat-list-item {
-  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  text-align: center;
+  background-color: #E6F4EA; /* Cor de fundo em tom de verde claro */
+}
+
+h2 {
+  color: rgb(37, 46, 37);
+}
+
+li {
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.container {
+  padding: 16px;
+  text-align: center;
+}
+
+.card-container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
 }
 
-mat-list-item:hover {
-  background-color: rgba(0, 0, 0, 0.1); /* Cor de destaque ao passar o mouse */
+.card {
+  width: 200px;
+  background-color: #66C974 !important; /* Cor principal dos cards */
+  color: white !important; /* Cor do texto dentro dos cards */
 }
 
-mat-list-item span {
-  margin-bottom: 8px; /* Espaço entre o span e o botão */
+.card-actions {
+  display: flex;
+  justify-content: center;
 }
 
-mat-list-item button {
-  margin-top: 8px;
+button {
+  background-color: #66C974 !important; /* Cor principal dos botões */
+  color: white !important; /* Cor do texto dos botões */
+}
+
+button:hover {
+  background-color: #57B566 !important; /* Cor dos botões ao passar o mouse */
+}
+
+/* Sobrescrever estilos do tema predefinido do Angular Material */
+.mat-card {
+  background-color: #66C974 !important; /* Cor principal dos cards */
+  color: white !important; /* Cor do texto dentro dos cards */
+}
+
+.mat-raised-button {
+  background-color: #66C974 !important; /* Cor principal dos botões */
+  color: white !important; /* Cor do texto dos botões */
+}
+
+.mat-raised-button:hover {
+  background-color: #57B566 !important; /* Cor dos botões ao passar o mouse */
 }
