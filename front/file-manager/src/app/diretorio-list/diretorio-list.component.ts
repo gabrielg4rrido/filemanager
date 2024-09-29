@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DiretorioService, DiretorioDTO, ArquivoDTO } from '../service/diretorio.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-diretorio-list',
   templateUrl: './diretorio-list.component.html',
   styleUrls: ['./diretorio-list.component.css'],
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [CommonModule, MatListModule, MatButtonModule, MatDividerModule, MatCardModule, MatInputModule, FormsModule]
 })
@@ -53,6 +54,11 @@ export class DiretorioListComponent implements OnInit {
   }
 
   criarDiretorio(): void {
+    if (this.novoDiretorio.nome.trim() === '') {
+      alert('O nome do diretório não pode estar vazio.');
+      return;
+    }
+    this.novoDiretorio.diretorioPaiId = this.diretorioAtualId; // Define o ID do diretório pai
     this.diretorioService.criarDiretorio(this.novoDiretorio).subscribe(() => {
       this.listarDiretorios();
       this.novoDiretorio = { id: 0, nome: '' };
@@ -72,6 +78,10 @@ export class DiretorioListComponent implements OnInit {
   }
 
   criarArquivo(): void {
+    if (this.novoArquivo.nome.trim() === '') {
+      alert('O nome do arquivo não pode estar vazio.');
+      return;
+    }
     if (this.diretorioAtualId) {
       this.diretorioService.criarArquivo(this.diretorioAtualId, this.novoArquivo).subscribe(() => {
         this.listarArquivos();

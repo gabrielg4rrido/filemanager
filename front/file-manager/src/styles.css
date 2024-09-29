@@ -4,7 +4,7 @@ html, body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   text-align: center;
-  background-color: #E6F4EA; /* Cor de fundo em tom de verde claro */
+  background-color: #E6F4EA; /* Cor de fundo da página */
 }
 
 h2 {
@@ -16,9 +16,27 @@ li {
   list-style-type: none;
 }
 
+/* Estilos específicos do componente */
 .container {
   padding: 16px;
-  text-align: center;
+}
+
+.form-container-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 32px; /* Espaçamento entre os formulários */
+  margin-bottom: 32px; /* Espaçamento inferior */
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px; /* Espaçamento entre os elementos do formulário */
+}
+
+.create-directory-form {
+  margin-bottom: 32px; /* Espaçamento entre os cards e o formulário para criar novo diretório */
 }
 
 .card-container {
@@ -27,14 +45,6 @@ li {
   justify-content: center;
   gap: 16px;
   margin-bottom: 32px; /* Espaçamento entre os cards e o formulário */
-}
-
-.form-container {
-  margin-bottom: 16px;
-}
-
-.create-directory-form {
-  margin-bottom: 32px; /* Espaçamento entre os cards e o formulário para criar novo diretório */
 }
 
 .card {
@@ -54,6 +64,7 @@ li {
   justify-content: center; /* Centraliza verticalmente */
   align-items: center; /* Centraliza horizontalmente */
   text-align: center; /* Centraliza o texto */
+  background-color: #d3ecda !important; /* Cor de fundo dos cards */
 }
 
 .arquivos-container {
@@ -75,8 +86,8 @@ button:hover {
 
 /* Sobrescrever estilos do tema predefinido do Angular Material */
 .mat-card {
-  background-color: #66C974 !important; /* Cor principal dos cards */
-  color: white !important; /* Cor do texto dentro dos cards */
+  background-color: #798b7e !important; /* Cor de fundo dos cards */
+  color: rgb(37, 46, 37) !important; /* Cor do texto dentro dos cards */
 }
 
 .mat-raised-button {
@@ -86,4 +97,22 @@ button:hover {
 
 .mat-raised-button:hover {
   background-color: #57B566 !important; /* Cor dos botões ao passar o mouse */
+}
+
+/* Estilos personalizados para inputs */
+.form-input {
+  padding: 8px;
+  margin: 8px 0;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-input:focus {
+  border-color: #66C974;
+  outline: none;
+  box-shadow: 0 0 5px rgba(102, 201, 116, 0.5);
 }

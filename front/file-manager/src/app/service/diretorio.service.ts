@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 export interface DiretorioDTO {
   id: number;
   nome: string;
-  diretorioPai?: DiretorioDTO;
+  diretorioPaiId?: number;
   diretoriosFilhos?: DiretorioDTO[];
   arquivos?: ArquivoDTO[];
 }
