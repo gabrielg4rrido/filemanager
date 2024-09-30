@@ -7,7 +7,7 @@
       <mat-card-title>{{ dir.nome }}</mat-card-title>
       <mat-card-actions class="card-actions">
         <button mat-raised-button color="primary" (click)="navegarParaSubdiretorio(dir.id)">Abrir</button>
-        <button mat-raised-button color="warn" (click)="excluirDiretorio(dir.id)">Excluir</button>
+        <button mat-raised-button color="warn" (click)="confirmarExclusaoDiretorio(dir.id)">Excluir</button>
       </mat-card-actions>
     </mat-card>
   </div>
@@ -18,7 +18,7 @@
       <mat-card *ngFor="let arquivo of arquivos" class="card fixed-size-card">
         <mat-card-title>{{ arquivo.nome }}.{{ arquivo.extensao }}</mat-card-title>
         <mat-card-actions class="card-actions">
-          <button mat-raised-button color="warn" (click)="excluirArquivo(arquivo.id)">Excluir</button>
+          <button mat-raised-button color="warn" (click)="confirmarExclusaoArquivo(arquivo.id)">Excluir</button>
         </mat-card-actions>
       </mat-card>
     </div>

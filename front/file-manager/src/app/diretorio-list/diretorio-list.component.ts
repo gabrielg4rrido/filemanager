@@ -114,4 +114,16 @@ export class DiretorioListComponent implements OnInit {
   voltar(): void {
     this.location.back();
   }
+
+  confirmarExclusaoDiretorio(id: number): void {
+    if (confirm('Deseja realmente excluir este diretório?')) {
+      this.excluirDiretorio(id);
+    }
+  }
+
+  confirmarExclusaoArquivo(id: number): void {
+    if (confirm('Deseja realmente excluir este arquivo?')) {
+      this.excluirArquivo(id);
+    }
+  }
 }
