@@ -1,10 +1,9 @@
-/* Estilos globais */
 html, body {
   height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   text-align: center;
-  background-color: #E6F4EA; /* Cor de fundo da página */
+  background-color: #E6F4EA;
 }
 
 h2 {
@@ -16,7 +15,6 @@ li {
   list-style-type: none;
 }
 
-/* Estilos específicos do componente */
 .container {
   padding: 16px;
 }
@@ -24,19 +22,19 @@ li {
 .form-container-wrapper {
   display: flex;
   justify-content: center;
-  gap: 32px; /* Espaçamento entre os formulários */
-  margin-bottom: 32px; /* Espaçamento inferior */
+  gap: 32px;
+  margin-bottom: 32px;
 }
 
 .form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px; /* Espaçamento entre os elementos do formulário */
+  gap: 8px;
 }
 
 .create-directory-form {
-  margin-bottom: 32px; /* Espaçamento entre os cards e o formulário para criar novo diretório */
+  margin-bottom: 32px;
 }
 
 .card-container {
@@ -44,7 +42,7 @@ li {
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
-  margin-bottom: 32px; /* Espaçamento entre os cards e o formulário */
+  margin-bottom: 32px;
 }
 
 .card {
@@ -57,46 +55,46 @@ li {
 }
 
 .fixed-size-card {
-  width: 300px; /* Aumenta a largura fixa */
-  min-height: 200px; /* Aumenta a altura mínima */
+  width: 300px;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centraliza verticalmente */
-  align-items: center; /* Centraliza horizontalmente */
-  text-align: center; /* Centraliza o texto */
-  background-color: #d3ecda !important; /* Cor de fundo dos cards */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #d3ecda !important;
 }
 
 .arquivos-container {
-  margin-top: 16px; /* Espaçamento superior entre as divs principais */
+  margin-top: 16px;
 }
 
 .voltar-button {
-  margin-top: 16px; /* Espaçamento superior */
+  margin-top: 16px;
 }
 
 button {
-  background-color: #66C974 !important; /* Cor principal dos botões */
-  color: white !important; /* Cor do texto dos botões */
+  background-color: #66C974 !important;
+  color: white !important;
 }
 
 button:hover {
-  background-color: #57B566 !important; /* Cor dos botões ao passar o mouse */
+  background-color: #57B566 !important;
 }
 
 /* Sobrescrever estilos do tema predefinido do Angular Material */
 .mat-card {
-  background-color: #798b7e !important; /* Cor de fundo dos cards */
-  color: rgb(37, 46, 37) !important; /* Cor do texto dentro dos cards */
+  background-color: #798b7e !important;
+  color: rgb(37, 46, 37) !important;
 }
 
 .mat-raised-button {
-  background-color: #66C974 !important; /* Cor principal dos botões */
-  color: white !important; /* Cor do texto dos botões */
+  background-color: #66C974 !important;
+  color: white !important;
 }
 
 .mat-raised-button:hover {
-  background-color: #57B566 !important; /* Cor dos botões ao passar o mouse */
+  background-color: #57B566 !important;
 }
 
 /* Estilos personalizados para inputs */
