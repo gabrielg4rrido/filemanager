@@ -18,11 +18,18 @@ FileManager é uma aplicação web para gerenciar arquivos e diretórios. A apli
 - [Docker](https://www.docker.com/)
 
 ## Configuração do Ambiente
-## Executando com Docker
+### Executando com Docker
 
 1. Certifique-se de que o Docker está instalado e em execução.
 
-2. Navegue até o diretório raiz do projeto e execute o comando:
+2. Clone o repositório:
+
+    ```sh
+    git clone https://github.com/gabrielg4rrido/filemanager.git
+    cd filemanager
+    ```
+
+3. Navegue até o diretório raiz do projeto e execute o comando:
 
     ```sh
     docker-compose up --build
@@ -31,7 +38,7 @@ FileManager é uma aplicação web para gerenciar arquivos e diretórios. A apli
    Isso irá construir e iniciar os contêineres Docker para o backend, frontend e banco de dados.
 
 
-3. Acesse a aplicação:
+4. Acesse a aplicação:
 
    - Backend: [`http://localhost:8080`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fhome%2Fgabrielgarrido%2FWorkspaces%2FPessoal%2Ffilemanager%2Ffront%2Ffile-manager%2Fsrc%2Fapp%2Fservice%2Fdiretorio.service.ts%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A85%2C%22character%22%3A16%7D%7D%5D%2C%22ccba5f79-d892-4984-a7a1-b5068af09fea%22%5D "Go to definition")
    - Frontend: [`http://localhost:4200`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fhome%2Fgabrielgarrido%2FWorkspaces%2FPessoal%2Ffilemanager%2Ffront%2Ffile-manager%2FREADME.md%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A6%2C%22character%22%3A46%7D%7D%5D%2C%22ccba5f79-d892-4984-a7a1-b5068af09fea%22%5D "Go to definition")
