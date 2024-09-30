@@ -78,6 +78,13 @@ public class DiretorioService {
         diretorioRepository.deleteById(id);
     }
 
+    public void atualizarNome(Long id, String nome) {
+        Diretorio diretorio = diretorioRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id));
+        diretorio.setNome(nome);
+        diretorioRepository.save(diretorio);
+    }
+
     private DiretorioDTO toDTO(Diretorio diretorio) {
         List<ArquivoDTO> arquivos = (diretorio.getArquivos() != null) ?
                 diretorio.getArquivos().stream()

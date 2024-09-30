@@ -75,6 +75,13 @@ public class ArquivoService {
         arquivoRepository.deleteById(id);
     }
 
+    public void atualizarNome(Long id, String nome) {
+        Arquivo arquivo = arquivoRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id));
+        arquivo.setNome(nome);
+        arquivoRepository.save(arquivo);
+    }
+
     public ArquivoDTO toDTO(Arquivo arquivo) {
         return new ArquivoDTO(arquivo.getId(), arquivo.getNome(), arquivo.getExtensao(), arquivo.getDiretorio().getId());
     }

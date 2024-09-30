@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/diretorios")
@@ -64,5 +65,12 @@ public class DiretorioController {
     public ResponseEntity<List<DiretorioDTO>> listarDiretoriosFilhos(@PathVariable Long id) {
         List<DiretorioDTO> filhos = diretorioService.listarDiretoriosFilhos(id);
         return ResponseEntity.ok().body(filhos);
+    }
+
+    @PatchMapping("/{id}/nome")
+    public ResponseEntity<Void> atualizarNomeDiretorio(@PathVariable Long id, @RequestBody Map<String, String> payload) {
+        String nome = payload.get("nome");
+        diretorioService.atualizarNome(id, nome);
+        return ResponseEntity.noContent().build();
     }
 }

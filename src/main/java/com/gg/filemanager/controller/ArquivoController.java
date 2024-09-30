@@ -9,6 +9,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/arquivos")
@@ -46,6 +47,13 @@ public class ArquivoController {
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deletarArquivo(@PathVariable Long id) {
         arquivoService.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/nome")
+    public ResponseEntity<Void> atualizarNomeArquivo(@PathVariable Long id, @RequestBody Map<String, String> payload) {
+        String nome = payload.get("nome");
+        arquivoService.atualizarNome(id, nome);
         return ResponseEntity.noContent().build();
     }
 }

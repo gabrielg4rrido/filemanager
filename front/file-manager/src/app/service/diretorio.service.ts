@@ -64,4 +64,14 @@ export class DiretorioService {
   excluirArquivo(idArquivo: number): Observable<void> {
     return this.http.delete<void>(`${this.arquivoUrl}/${idArquivo}`);
   }
+
+    // Novo método para atualizar o nome do diretório
+    atualizarNomeDiretorio(id: number, nome: string): Observable<DiretorioDTO> {
+      return this.http.patch<DiretorioDTO>(`${this.diretorioUrl}/${id}/nome`, { nome });
+    }
+
+    // Novo método para atualizar o nome do arquivo
+    atualizarNomeArquivo(id: number, nome: string): Observable<ArquivoDTO> {
+      return this.http.patch<ArquivoDTO>(`${this.arquivoUrl}/${id}/nome`, { nome });
+    }
 }

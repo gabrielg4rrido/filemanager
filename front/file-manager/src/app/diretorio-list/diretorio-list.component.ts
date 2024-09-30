@@ -23,6 +23,8 @@ export class DiretorioListComponent implements OnInit {
   arquivos: ArquivoDTO[] = [];
   novoDiretorio: DiretorioDTO = { id: 0, nome: '' };
   novoArquivo: ArquivoDTO = { id: 0, nome: '', extensao: '' };
+  editandoDiretorio: DiretorioDTO | null = null;
+  editandoArquivo: ArquivoDTO | null = null;
 
   constructor(
     private diretorioService: DiretorioService,
@@ -125,5 +127,45 @@ export class DiretorioListComponent implements OnInit {
     if (confirm('Deseja realmente excluir este arquivo?')) {
       this.excluirArquivo(id);
     }
+  }
+
+  // Novo método para iniciar a edição do nome do diretório
+  editarNomeDiretorio(diretorio: DiretorioDTO): void {
+    this.editandoDiretorio = { ...diretorio };
+  }
+
+  // Novo método para salvar a edição do nome do diretório
+  salvarNomeDiretorio(): void {
+    if (this.editandoDiretorio) {
+      this.diretorioService.atualizarNomeDiretorio(this.editandoDiretorio.id, this.editandoDiretorio.nome).subscribe(() => {
+        this.listarDiretorios();
+        this.editandoDiretorio = null;
+      });
+    }
+  }
+
+  // Novo método para cancelar a edição do nome do diretório
+  cancelarEdicaoDiretorio(): void {
+    this.editandoDiretorio = null;
+  }
+
+  // Novo método para iniciar a edição do nome do arquivo
+  editarNomeArquivo(arquivo: ArquivoDTO): void {
+    this.editandoArquivo = { ...arquivo };
+  }
+
+  // Novo método para salvar a edição do nome do arquivo
+  salvarNomeArquivo(): void {
+    if (this.editandoArquivo) {
+      this.diretorioService.atualizarNomeArquivo(this.editandoArquivo.id, this.editandoArquivo.nome).subscribe(() => {
+        this.listarArquivos();
+        this.editandoArquivo = null;
+      });
+    }
+  }
+
+  // Novo método para cancelar a edição do nome do arquivo
+  cancelarEdicaoArquivo(): void {
+    this.editandoArquivo = null;
   }
 }
