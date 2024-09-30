@@ -45,10 +45,6 @@ export class DiretorioService {
     return this.http.post<DiretorioDTO>(this.diretorioUrl, diretorio);
   }
 
-  atualizarDiretorio(diretorio: DiretorioDTO): Observable<DiretorioDTO> {
-    return this.http.put<DiretorioDTO>(`${this.diretorioUrl}/${diretorio.id}`, diretorio);
-  }
-
   excluirDiretorio(id: number): Observable<void> {
     return this.http.delete<void>(`${this.diretorioUrl}/${id}`);
   }
@@ -57,21 +53,15 @@ export class DiretorioService {
     return this.http.post<ArquivoDTO>(`${this.arquivoUrl}`, arquivo);
   }
 
-  atualizarArquivo(arquivo: ArquivoDTO): Observable<ArquivoDTO> {
-    return this.http.put<ArquivoDTO>(`${this.arquivoUrl}/${arquivo.id}`, arquivo);
-  }
-
   excluirArquivo(idArquivo: number): Observable<void> {
     return this.http.delete<void>(`${this.arquivoUrl}/${idArquivo}`);
   }
 
-    // Novo método para atualizar o nome do diretório
-    atualizarNomeDiretorio(id: number, nome: string): Observable<DiretorioDTO> {
-      return this.http.patch<DiretorioDTO>(`${this.diretorioUrl}/${id}/nome`, { nome });
-    }
+  atualizarNomeDiretorio(id: number, nome: string): Observable<DiretorioDTO> {
+    return this.http.patch<DiretorioDTO>(`${this.diretorioUrl}/${id}/nome`, { nome });
+  }
 
-    // Novo método para atualizar o nome do arquivo
-    atualizarNomeArquivo(id: number, nome: string): Observable<ArquivoDTO> {
-      return this.http.patch<ArquivoDTO>(`${this.arquivoUrl}/${id}/nome`, { nome });
-    }
+  atualizarNomeArquivo(id: number, nome: string): Observable<ArquivoDTO> {
+    return this.http.patch<ArquivoDTO>(`${this.arquivoUrl}/${id}/nome`, { nome });
+  }
 }

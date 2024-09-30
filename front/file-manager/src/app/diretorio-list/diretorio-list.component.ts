@@ -67,12 +67,6 @@ export class DiretorioListComponent implements OnInit {
     });
   }
 
-  atualizarDiretorio(diretorio: DiretorioDTO): void {
-    this.diretorioService.atualizarDiretorio(diretorio).subscribe(() => {
-      this.listarDiretorios();
-    });
-  }
-
   excluirDiretorio(id: number): void {
     this.diretorioService.excluirDiretorio(id).subscribe(() => {
       this.listarDiretorios();
@@ -89,14 +83,6 @@ export class DiretorioListComponent implements OnInit {
       this.diretorioService.criarArquivo(this.novoArquivo).subscribe(() => {
         this.listarArquivos();
         this.novoArquivo = { id: 0, nome: '', extensao: '' };
-      });
-    }
-  }
-
-  atualizarArquivo(arquivo: ArquivoDTO): void {
-    if (this.diretorioAtualId) {
-      this.diretorioService.atualizarArquivo(arquivo).subscribe(() => {
-        this.listarArquivos();
       });
     }
   }
@@ -129,12 +115,10 @@ export class DiretorioListComponent implements OnInit {
     }
   }
 
-  // Novo método para iniciar a edição do nome do diretório
   editarNomeDiretorio(diretorio: DiretorioDTO): void {
     this.editandoDiretorio = { ...diretorio };
   }
 
-  // Novo método para salvar a edição do nome do diretório
   salvarNomeDiretorio(): void {
     if (this.editandoDiretorio) {
       this.diretorioService.atualizarNomeDiretorio(this.editandoDiretorio.id, this.editandoDiretorio.nome).subscribe(() => {
@@ -144,17 +128,14 @@ export class DiretorioListComponent implements OnInit {
     }
   }
 
-  // Novo método para cancelar a edição do nome do diretório
   cancelarEdicaoDiretorio(): void {
     this.editandoDiretorio = null;
   }
 
-  // Novo método para iniciar a edição do nome do arquivo
   editarNomeArquivo(arquivo: ArquivoDTO): void {
     this.editandoArquivo = { ...arquivo };
   }
 
-  // Novo método para salvar a edição do nome do arquivo
   salvarNomeArquivo(): void {
     if (this.editandoArquivo) {
       this.diretorioService.atualizarNomeArquivo(this.editandoArquivo.id, this.editandoArquivo.nome).subscribe(() => {
@@ -164,7 +145,6 @@ export class DiretorioListComponent implements OnInit {
     }
   }
 
-  // Novo método para cancelar a edição do nome do arquivo
   cancelarEdicaoArquivo(): void {
     this.editandoArquivo = null;
   }

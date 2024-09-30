@@ -1,7 +1,6 @@
 <div class="container">
   <h2>Mini sistema de arquivos virtuais ESSIA</h2>
 
-  <!-- Lista de diretórios -->
   <div class="card-container">
     <mat-card *ngFor="let dir of diretorios" class="card fixed-size-card">
       <mat-card-title>
@@ -22,7 +21,6 @@
     </mat-card>
   </div>
 
-  <!-- Lista de arquivos -->
   <div *ngIf="diretorioAtualId" class="arquivos-container">
     <div class="card-container">
       <mat-card *ngFor="let arquivo of arquivos" class="card fixed-size-card">
@@ -45,20 +43,17 @@
   </div>
 
   <div class="form-container-wrapper">
-    <!-- Formulário para criar novo diretório -->
     <div class="form-container create-directory-form">
       <input id="novoDiretorioNome" [(ngModel)]="novoDiretorio.nome" placeholder="Nome do novo diretório" class="form-input">
       <button mat-raised-button (click)="criarDiretorio()">Criar Diretório</button>
     </div>
 
-    <!-- Formulário para criar novo arquivo -->
     <div *ngIf="diretorioAtualId" class="form-container">
       <input id="novoArquivoNome" [(ngModel)]="novoArquivo.nome" placeholder="Nome do novo arquivo" class="form-input">
       <input id="novoArquivoExtensao" [(ngModel)]="novoArquivo.extensao" placeholder="Extensão do novo arquivo" class="form-input">
       <button mat-raised-button (click)="criarArquivo()">Criar Arquivo</button>
     </div>
   </div>
-
 
   <button *ngIf="diretorioAtualId" mat-raised-button color="primary" class="voltar-button" (click)="voltar()">Voltar</button>
 </div>
