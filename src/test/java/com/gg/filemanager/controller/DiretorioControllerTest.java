@@ -1,6 +1,5 @@
-package com.gg.filemanager;
+package com.gg.filemanager.controller;
 
-import com.gg.filemanager.controller.DiretorioController;
 import com.gg.filemanager.dto.ArquivoDTO;
 import com.gg.filemanager.dto.DiretorioDTO;
 import com.gg.filemanager.service.ArquivoService;
@@ -36,7 +35,7 @@ public class DiretorioControllerTest {
     private DiretorioController diretorioController;
 
     @Test
-    public void shouldReturnListOfDiretorios() {
+    public void deveRetornarListaDeDiretorios() {
         List<DiretorioDTO> diretorios = List.of(new DiretorioDTO(1L, "Diretorio 1", null, Collections.emptyList(), Collections.emptyList()));
         given(diretorioService.listarTodos()).willReturn(diretorios);
 
@@ -47,7 +46,7 @@ public class DiretorioControllerTest {
     }
 
     @Test
-    public void shouldReturnDiretorioById() {
+    public void deveRetornarDiretorioPorId() {
         DiretorioDTO diretorio = new DiretorioDTO(1L, "Diretorio 1", null, Collections.emptyList(), Collections.emptyList());
         given(diretorioService.listarUm(1L)).willReturn(diretorio);
 
@@ -58,7 +57,7 @@ public class DiretorioControllerTest {
     }
 
     @Test
-    public void shouldCreateDiretorio() {
+    public void deveCriarDiretorio() {
         DiretorioDTO diretorio = new DiretorioDTO(null, "Novo Diretorio", null, Collections.emptyList(), Collections.emptyList());
         DiretorioDTO createdDiretorio = new DiretorioDTO(1L, "Novo Diretorio", null, Collections.emptyList(), Collections.emptyList());
         given(diretorioService.criar(diretorio)).willReturn(createdDiretorio);
@@ -73,7 +72,7 @@ public class DiretorioControllerTest {
 
 
     @Test
-    public void shouldUpdateDiretorio() {
+    public void deveAtualizarDiretorio() {
         DiretorioDTO diretorio = new DiretorioDTO(1L, "Diretorio Atualizado", null, Collections.emptyList(), Collections.emptyList());
         doAnswer(invocation -> null).when(diretorioService).atualizar(1L, diretorio);
 
@@ -84,7 +83,7 @@ public class DiretorioControllerTest {
     }
 
     @Test
-    public void shouldDeleteDiretorio() {
+    public void deveDeletarDiretorio() {
         doNothing().when(diretorioService).deletar(1L);
 
         ResponseEntity<Void> responseEntity = diretorioController.deletarDiretorio(1L);
@@ -108,7 +107,7 @@ public class DiretorioControllerTest {
 
 
     @Test
-    public void shouldReturnListOfDiretoriosFilhos() {
+    public void deveRetornarListaDeDiretoriosFilhos() {
         List<DiretorioDTO> filhos = List.of(new DiretorioDTO(2L, "Diretorio Filho", 1L, Collections.emptyList(), Collections.emptyList()));
         given(diretorioService.listarDiretoriosFilhos(1L)).willReturn(filhos);
 

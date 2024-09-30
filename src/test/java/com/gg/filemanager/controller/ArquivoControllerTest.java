@@ -1,6 +1,5 @@
-package com.gg.filemanager;
+package com.gg.filemanager.controller;
 
-import com.gg.filemanager.controller.ArquivoController;
 import com.gg.filemanager.dto.ArquivoDTO;
 import com.gg.filemanager.service.ArquivoService;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,7 @@ public class ArquivoControllerTest {
     private ArquivoController arquivoController;
 
     @Test
-    public void shouldReturnEmptyListWhenNoFilesArePresent() {
+    public void deveRetornarListaVaziaQuandoNaoExistemArquivos() {
         given(arquivoService.listarTodos()).willReturn(Collections.emptyList());
 
         ResponseEntity<List<ArquivoDTO>> responseEntity = arquivoController.listarArquivos();
@@ -39,7 +38,7 @@ public class ArquivoControllerTest {
     }
 
     @Test
-    public void shouldReturnListOfArquivos() {
+    public void deveRetornarListaDeArquivos() {
         List<ArquivoDTO> arquivos = List.of(new ArquivoDTO(1L, "Arquivo 1", "pdf", 1L));
         given(arquivoService.listarTodos()).willReturn(arquivos);
 
@@ -50,7 +49,7 @@ public class ArquivoControllerTest {
     }
 
     @Test
-    public void shouldReturnArquivoById() {
+    public void deveRetornarArquivoPorId() {
         ArquivoDTO arquivo = new ArquivoDTO(1L, "Arquivo 1", "pdf", 1L);
         given(arquivoService.listarUm(1L)).willReturn(arquivo);
 
@@ -61,7 +60,7 @@ public class ArquivoControllerTest {
     }
 
     @Test
-    public void shouldCreateArquivo() {
+    public void deveCriarArquivo() {
         ArquivoDTO arquivo = new ArquivoDTO(null, "Novo Arquivo", "pdf", 1L);
         ArquivoDTO createdArquivo = new ArquivoDTO(1L, "Novo Arquivo", "pdf", 1L);
         given(arquivoService.criar(arquivo)).willReturn(createdArquivo);
@@ -72,7 +71,7 @@ public class ArquivoControllerTest {
     }
 
     @Test
-    public void shouldUpdateArquivo() {
+    public void deveAtualizarArquivo() {
         ArquivoDTO arquivo = new ArquivoDTO(1L, "Arquivo Atualizado", "pdf", 1L);
         doNothing().when(arquivoService).atualizar(1L, arquivo);
 
@@ -83,7 +82,7 @@ public class ArquivoControllerTest {
     }
 
     @Test
-    public void shouldDeleteArquivo() {
+    public void deveDeletarArquivo() {
         doNothing().when(arquivoService).deletar(1L);
 
         ResponseEntity<Void> responseEntity = arquivoController.deletarArquivo(1L);
